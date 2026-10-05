@@ -24,3 +24,10 @@ The trade-off: we rely on `JSON.stringify`'s insertion-order property rather tha
 ## Awkward edge
 
 Context values that `JSON.stringify` cannot handle — circular references, functions, symbols wrapped in objects — would normally throw and kill the logger. This library catches that failure, stringifies the offending value as a fallback, and ships the record anyway. The record still goes out, but the field will contain a string like `"[object Object]"` rather than the original structure. If you see that in your logs, the value you passed was not JSON-serialisable; pass a plain serialisable representation instead.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
