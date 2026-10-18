@@ -1,6 +1,6 @@
 {
   "name": "json-log",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Log output as JSON with consistent key order.",
   "type": "module",
   "main": "src/index.js",
